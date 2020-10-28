@@ -29,12 +29,12 @@ const createFullQuery = (searchString) => {
     )
 }
 
-const searchGiphy = (url, res) => {
+const searchGiphy = (url, res, searchString) => {
     const p = fetch(url)
     p.then(result => {
         const p = result.json()
         p.then(data => {
-            renderResults(data, res)
+            renderResults(data, res, searchString)
         }).catch(e => {
             console.info('error')
             console.info('error: ', e)
@@ -46,7 +46,7 @@ const searchGiphy = (url, res) => {
     })
 }
 
-const renderResults = (data, res) => {
+const renderResults = (data, res, searchString) => {
     let imagesArray = data["data"]
     let imagesURLArray = []
     for(i = 0; i < imagesArray.length; i++) {
@@ -56,7 +56,8 @@ const renderResults = (data, res) => {
     res.type('text/html')
     res.render('searchResult',
         {
-            searchGifsArray: imagesURLArray
+            searchGifsArray: imagesURLArray,
+            searchTerm: searchString
         }
     )
 }
@@ -71,7 +72,7 @@ app.get(['/', 'index.html'], (req, res) => {
 app.get('/search', (req, res) => {
     const searchString = req.query.searchstring
     let url = createFullQuery(searchString)
-    searchGiphy(url, res)
+    searchGiphy(url, res, searchString)
 })
 
 //start the app
