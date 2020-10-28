@@ -50,7 +50,7 @@ const renderResults = (data, res) => {
     let imagesArray = data["data"]
     let imagesURLArray = []
     for(i = 0; i < imagesArray.length; i++) {
-        imagesURLArray.push(imagesArray[i]['images']['downsized']['url'])
+        imagesURLArray.push(imagesArray[i]['images']['fixed_height']['url'])
     }
     res.status(200)
     res.type('text/html')
