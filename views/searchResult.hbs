@@ -1,4 +1,6 @@
 <p><b>Search Results for your search term</b><i> {{ searchTerm }}</i></p>
 {{#each searchGifsArray}}
 <img src="{{ this }}" alt="gif">
+{{else}}
+<p>No results were found for your search term!</p>
 {{/each}}
