@@ -75,6 +75,25 @@ app.get('/search', (req, res) => {
     searchGiphy(url, res, searchString)
 })
 
+//alternative using async await to currently used method
+/*
+app.get('/search', async (req,res) => {
+    const result = await fetch(url)
+    const giphys = await result.json()
+    const imgs = []
+    for(let d of giphys.data) {
+        const title = d.title
+        const url = d.images.fixed_height.url
+        imgs.push({title, url})
+    }
+    res.status(200)
+    res.type('text/html')
+    res.render(searchResult,{
+        searchGifsArray: imgs
+    })
+})
+*/
+
 //start the app
 if(API_KEY) {
     app.listen(
